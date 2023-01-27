@@ -1,4 +1,4 @@
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 from os import path
 class PDF:
 
@@ -6,12 +6,13 @@ class PDF:
         pass
 
     def splitePDF(_path=None):
-        fname = path.splitext(path.basename(self._fileName))[0]
-    
-        pdf = PdfFileReader(_path)
-        for page in range(pdf.getNumPages()):
-            pdf_writer = PdfFileWriter()
-            pdf_writer.addPage(pdf.getPage(page))
+        #fname = path.splitext(_path)[0]
+        fname = _path
+        pdf = PdfReader(fname)
+        paginas = len(pdf.pages)
+        for page in range(paginas):
+            pdf_writer = PdfWriter()
+            pdf_writer.add_page(pdf.pages[page])
     
             output_filename = '{}_page_{}.pdf'.format(
                 fname, page+1)
